@@ -18,6 +18,7 @@ public class PersonaService {
     }
 
     public Persona getPersonaById(Long id) {
+        System.out.println("ID="+id);
         return personaRepository.findById(id).orElse(null);
     }
 
