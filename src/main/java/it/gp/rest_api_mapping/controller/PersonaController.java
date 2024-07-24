@@ -1,7 +1,7 @@
 package it.gp.rest_api_mapping.controller;
 
 import it.gp.rest_api_mapping.exception.PersonaNotFoundException;
-import it.gp.rest_api_mapping.model.Persona;
+import it.gp.rest_api_mapping.model.PersonaDTO;
 import it.gp.rest_api_mapping.service.PersonaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,21 +16,21 @@ public class PersonaController {
     private PersonaService personaService;
 
     @GetMapping
-    public List<Persona> getAllPersone() {
+    public List<PersonaDTO> getAllPersone() {
         return personaService.getAllPersone();
     }
 
     @GetMapping("/{id}")
-    public Persona getPersonaById(@PathVariable Long id) {
-        Persona p = personaService.getPersonaById(id);
+    public PersonaDTO getPersonaById(@PathVariable Long id) {
+        PersonaDTO p = personaService.getPersonaById(id);
         if (p == null)
             throw new PersonaNotFoundException("Persona not found with id:" + id);
         return p;
     }
 
     @PostMapping
-    public Persona createPersona(@RequestBody Persona persona) {
-        return personaService.savePersona(persona);
+    public PersonaDTO createPersona(@RequestBody PersonaDTO personaDTO) {
+        return personaService.savePersona(personaDTO);
     }
 
     @DeleteMapping("/{id}")
